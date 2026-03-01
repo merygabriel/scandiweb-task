@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, type MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import type { Product } from '../types';
@@ -23,7 +23,7 @@ export default function ProductCard({ product, 'data-testid': dataTestId }: Prod
   const inStock = product.inStock;
   const showQuickShop = inStock && hover;
 
-  const handleQuickShop = (e: React.MouseEvent) => {
+  const handleQuickShop = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     const selectedAttributes: Record<string, string> = {};

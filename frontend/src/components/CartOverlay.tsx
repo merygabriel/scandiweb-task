@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { graphql, PLACE_ORDER } from '../api/graphql';
 import type { Product } from '../types';
