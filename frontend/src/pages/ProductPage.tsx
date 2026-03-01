@@ -75,7 +75,7 @@ export default function ProductPage({ onAddToCartOpenCart }: ProductPageProps) {
   const mainImage = gallery[galleryIndex] || gallery[0];
 
   return (
-    <div className="pdp">
+    <div className="pdp" data-testid="pdp">
       <div className="pdp-gallery" data-testid="product-gallery">
         <div className="pdp-thumbnails">
           {gallery.map((url, i) => (

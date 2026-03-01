@@ -26,7 +26,7 @@ export default function Header({ onCartClick }: HeaderProps) {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="header">
+    <header className="header" data-testid="header">
       <button
         type="button"
         className={`header-menu-btn ${menuOpen ? 'header-menu-btn-open' : ''}`}

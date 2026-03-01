@@ -71,7 +71,7 @@ export default function CartOverlay({ onClose, onBackdropClick, onOrderSuccess }
         onClick={onBackdropClick}
         aria-hidden="true"
       />
-      <aside className="cart-overlay">
+      <aside className="cart-overlay" data-testid="cart-overlay">
         <div className="cart-overlay-header">
           <h2 className="cart-overlay-title">My Bag, {itemLabel}</h2>
           <button type="button" className="cart-overlay-close" onClick={onClose} aria-label="Close">

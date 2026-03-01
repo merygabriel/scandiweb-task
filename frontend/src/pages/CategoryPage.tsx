@@ -62,9 +62,9 @@ export default function CategoryPage() {
   if (error) return <div className="category-error">Error: {error}</div>;
 
   return (
-    <div className="category-page">
+    <div className="category-page" data-testid="category-page">
       <h1 className="category-title">{categoryTitle}</h1>
-      <div className="product-grid">
+      <div className="product-grid" data-testid="product-list">
         {products.map((product) => (
           <ProductCard
             key={product.id}
