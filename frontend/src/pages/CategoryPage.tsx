@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { graphql, GET_CATEGORIES, GET_PRODUCTS } from '../api/graphql';
 import type { GetCategoriesData, GetProductsData } from '../api/graphql';
 import type { Category, Product } from '../types';
@@ -11,8 +11,8 @@ function toKebab(str: string): string {
 }
 
 export default function CategoryPage() {
-  const { categoryName } = useParams();
-  const effectiveCategory = categoryName || 'all';
+  const { pathname } = useLocation();
+  const effectiveCategory = pathname === '/' ? 'all' : pathname.replace(/^\//, '') || 'all';
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);

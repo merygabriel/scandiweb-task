@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import Header from './components/Header';
 import CartOverlay from './components/CartOverlay';
@@ -24,8 +24,10 @@ function App() {
           <Header onCartClick={() => setCartOpen(true)} />
           <main className={cartOpen ? 'main dimmed' : 'main'}>
             <Routes>
-              <Route path="/" element={<CategoryPage />} />
-              <Route path="/category/:categoryName" element={<CategoryPage />} />
+              <Route path="/" element={<Navigate to="/all" replace />} />
+              <Route path="/all" element={<CategoryPage />} />
+              <Route path="/clothes" element={<CategoryPage />} />
+              <Route path="/tech" element={<CategoryPage />} />
               <Route
                 path="/product/:productId"
                 element={<ProductPage onAddToCartOpenCart={() => setCartOpen(true)} />}

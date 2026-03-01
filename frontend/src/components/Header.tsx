@@ -8,9 +8,9 @@ interface HeaderProps {
 }
 
 const categories = [
-  { name: 'all', path: '/' },
-  { name: 'clothes', path: '/category/clothes' },
-  { name: 'tech', path: '/category/tech' },
+  { name: 'all', path: '/all' },
+  { name: 'clothes', path: '/clothes' },
+  { name: 'tech', path: '/tech' },
 ];
 
 export default function Header({ onCartClick }: HeaderProps) {
@@ -18,7 +18,7 @@ export default function Header({ onCartClick }: HeaderProps) {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const activeCategory =
-    pathname.startsWith('/category/') ? pathname.replace('/category/', '') : 'all';
+    pathname === '/' ? 'all' : pathname.replace(/^\//, '') || 'all';
 
   const linkClass = (name: string) =>
     `header-link ${activeCategory === name ? 'active' : ''}`;
@@ -49,7 +49,7 @@ export default function Header({ onCartClick }: HeaderProps) {
         ))}
       </nav>
       <div className="header-logo">
-        <Link to="/" aria-label="Home" onClick={closeMenu}>
+        <Link to="/all" aria-label="Home" onClick={closeMenu}>
           <span className="logo-icon" />
         </Link>
       </div>
