@@ -44,8 +44,10 @@ export default function ProductCard({ product, 'data-testid': dataTestId }: Prod
       data-testid={dataTestId ?? `product-${product.name?.toLowerCase().replace(/\s+/g, '-')}`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      onClick={handleCardClick}
+      style={{ cursor: 'pointer' }}
     >
-      <div className="product-card-image-wrap" onClick={handleCardClick}>
+      <div className="product-card-image-wrap">
         <img
           src={product.gallery?.[0]}
           alt={product.name}
@@ -63,7 +65,7 @@ export default function ProductCard({ product, 'data-testid': dataTestId }: Prod
           </button>
         )}
       </div>
-      <div className="product-card-info" onClick={handleCardClick}>
+      <div className="product-card-info">
         <p className="product-card-name">{product.name}</p>
         <p className="product-card-price">{formatPrice(product.prices)}</p>
       </div>

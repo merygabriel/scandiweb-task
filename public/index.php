@@ -38,9 +38,51 @@ if (($pos = strpos($uri, '?')) !== false) {
 }
 $uri = rawurldecode($uri);
 
+if ($httpMethod === 'OPTIONS') {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type');
+    http_response_code(200);
+    exit;
+}
+
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
+        // SPA fallback: serve frontend for GET so /, /all, /tech, /product/xxx load the app
+        if ($httpMethod === 'GET') {
+            $distDir = $projectRoot . '/frontend/dist';
+            $indexPath = $distDir . '/index.html';
+            // Serve static assets from frontend/dist (e.g. /assets/index-xxx.js)
+            if (preg_match('#^/assets/#', $uri)) {
+                $file = $distDir . $uri;
+                if ($file !== $distDir && is_file($file)) {
+                    $mimes = [
+                        'js' => 'application/javascript',
+                        'css' => 'text/css',
+                        'json' => 'application/json',
+                        'png' => 'image/png',
+                        'jpg' => 'image/jpeg',
+                        'jpeg' => 'image/jpeg',
+                        'svg' => 'image/svg+xml',
+                        'ico' => 'image/x-icon',
+                        'woff' => 'font/woff',
+                        'woff2' => 'font/woff2',
+                    ];
+                    $ext = pathinfo($file, PATHINFO_EXTENSION);
+                    if (isset($mimes[$ext])) {
+                        header('Content-Type: ' . $mimes[$ext]);
+                    }
+                    readfile($file);
+                    exit;
+                }
+            }
+            if (is_file($indexPath)) {
+                header('Content-Type: text/html; charset=utf-8');
+                readfile($indexPath);
+                exit;
+            }
+        }
         http_response_code(404);
         echo json_encode(['error' => 'Not Found']);
         break;

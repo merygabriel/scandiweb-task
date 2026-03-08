@@ -93,8 +93,8 @@ export default function CartOverlay({ onClose, onBackdropClick, onOrderSuccess }
                   >
                     {(attr.items || []).map((item) => {
                       const isSelected = selectedAttributes[attr.id] === item.value;
-                      const valueKebab = toKebab(String(item.value));
                       const attrKebab = toKebab(attr.name);
+                      const valueKebab = item.displayValue.replace(/\s+/g, '-').toLowerCase();
                       const testId = `cart-item-attribute-${attrKebab}-${valueKebab}${isSelected ? '-selected' : ''}`;
                       const isSwatch = attr.type === 'swatch';
                       const newAttributes = { ...selectedAttributes, [attr.id]: item.value };

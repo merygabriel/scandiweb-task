@@ -133,12 +133,16 @@ export default function ProductPage({ onAddToCartOpenCart }: ProductPageProps) {
               {(attr.items || []).map((item) => {
                 const isSelected = selectedAttributes[attr.id] === item.value;
                 const isSwatch = attr.type === 'swatch';
+                const attrKebab = toKebab(attr.name);
+                const valueKebab = item.displayValue.replace(/\s+/g, '-').toLowerCase();
+                const testId = `product-attribute-${attrKebab}-${valueKebab}${isSelected ? '-selected' : ''}`;
                 return (
                   <button
                     key={item.id}
                     type="button"
                     className={`pdp-attr-option ${isSwatch ? 'swatch' : 'text'} ${isSelected ? 'selected' : ''}`}
                     style={isSwatch ? { backgroundColor: item.value } : undefined}
+                    data-testid={testId}
                     onClick={() =>
                       setSelectedAttributes((s) => ({ ...s, [attr.id]: item.value }))
                     }

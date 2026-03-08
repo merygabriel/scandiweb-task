@@ -17,7 +17,7 @@ final class AttributeSetType extends ObjectType
             'fields' => [
                 'id' => [
                     'type' => Type::string(),
-                    'resolve' => static fn(AbstractAttributeSet $s): string => $s->getId(),
+                    'resolve' => static fn(AbstractAttributeSet $s): string => $s->getName(),
                 ],
                 'name' => [
                     'type' => Type::string(),
