@@ -1,0 +1,6 @@
+# Railway uses Nixpacks. Default PHP start is Nginx + wrong docroot for this app.
+# This uses PHP's built-in server with public/router.php → index.php for /graphql.
+# https://nixpacks.com/docs/configuration/file
+
+[start]
+cmd = "php -S 0.0.0.0:$PORT -t public public/router.php"
