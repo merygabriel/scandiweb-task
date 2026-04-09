@@ -1,0 +1,10 @@
+# Root-only paths (leading /) so frontend/src and frontend/public are still uploaded.
+/vendor
+/src
+/database
+/docs
+/config
+/public
+/composer.json
+/composer.lock
+/.htaccess
